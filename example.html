@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Toolbox</title>
+  <script type="text/javascript" src="skulpt_dist/skulpt.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="skulpt_dist/skulpt-stdlib.js" type="text/javascript"></script>
+
+  <script type="text/javascript" src="../blockpy/blockly/blockly_compressed.js"></script>
+  <script type="text/javascript" src="../blockpy/blockly/blocks_compressed.js"></script>
+  <script type="text/javascript" src="../blockpy/blockly/python_compressed.js"></script>
+  <script type="text/javascript" src="../blockpy/blockly/msg/js/sr.js"></script>
+  <script type="text/javascript" src="../blockpy/src/utilities.js"></script>
+  <script type="text/javascript" src="../blockpy/src/python_errors.js"></script>
+  <script type="text/javascript" src="../blockpy/src/ast_node_visitor.js"></script>
+  <script type="text/javascript" src="../blockpy/src/abstract_interpreter.js"></script>
+  <script type="text/javascript" src="../blockpy/src/pytifa.js"></script>
+  <script type="text/javascript" src="../blockpy/src/abstract_interpreter_definitions.js"></script>
+  <!-- <script type="text/javascript" src="../blockpy/src/abstract_interpreter_tests.js"></script> -->
+  <script type="text/javascript" src="../blockpy/src/python_to_blockly.js"></script>
+  <script type="text/javascript" src="../blockpy/src/imported.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/class.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/comment.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/comprehensions.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/dict.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/if.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/io.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/lists.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/sets.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/loops.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/parking.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/tuple.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/turtles.js"></script>
+  <script type="text/javascript" src="../blockpy/src/blockly_blocks/text.js"></script>
+
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    Blocly example</h1>
+
+  <div id="blocklyDiv" style="height: 350px; width: 600px;"></div>
+  <xml id="toolbox" style="display: none">
+    <category name="Variables" custom="VARIABLE" colour="240"></category>
+    <category name="Decisions" colour="330">
+      <block type="controls_if_better"></block>
+      <block type="controls_if_better">
+        <mutation else="1"></mutation>
+      </block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+    </category>
+    <category name="Iteration" colour="300">
+      <block type="controls_forEach"></block>
+    </category>
+    <sep></sep>
+    <category name="Calculation" colour="270">
+      <block type="math_arithmetic"></block>
+      <block type="math_round"></block>
+    </category>
+    <category name="Output" colour="160">
+      <block type="text_print"></block>
+    </category>
+    <category name="Input" colour="165">
+      <block type="text_input"></block>
+    </category>
+    <sep></sep>
+    <category name="Values" colour="100">
+      <block type="text"></block>
+      <block type="math_number"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="Conversion" colour="275">
+      <block type="procedures_callreturn" inline="true">
+        <mutation name="int">
+          <arg name=""></arg>
+        </mutation>
+      </block>
+      <block type="procedures_callreturn" inline="true">
+        <mutation name="float">
+          <arg name=""></arg>
+        </mutation>
+      </block>
+      <block type="procedures_callreturn" inline="true">
+        <mutation name="str">
+          <arg name=""></arg>
+        </mutation>
+      </block>
+      <block type="procedures_callreturn" inline="true">
+        <mutation name="bool">
+          <arg name=""></arg>
+        </mutation>
+      </block>
+    </category>
+    <category name="Lists" colour="30">
+      <block type="lists_create_with">
+        <value name="ADD0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_create_empty"></block>
+      <block type="lists_append"></block>
+      <block type="procedures_callreturn" inline="true">
+        <mutation name="range">
+          <arg name="">
+            <block type="math_number">
+              <field name="NUM">10</field>
+            </block>
+          </arg>
+        </mutation>
+        <value name="ARG0">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+    </category>
+    <category name="Dictionaries" colour="0">
+      <block type="dicts_create_with"></block>
+      <block type="dict_get_literal"></block>
+    </category>
+  </xml>
+  <div><button onclick="blocksToPython()">Blocks -> Python</button></div>
+  <div><button onclick="pythonToBlocks()">Python -> Blocks</button></div>
+<div><textarea id="pythonSrc" rows="20" cols="70"></textarea></div>
+  <script>
+
+    // Hack to prevent chrome errors. Forces audio to load on demand. 
+    // See: https://github.com/google/blockly/issues/299
+    Blockly.WorkspaceSvg.prototype.preloadAudio_ = function() {};
+
+    var blocklyWorkspace = Blockly.inject('blocklyDiv',
+      {
+        media: '../blockly/media/',
+        toolbox: document.getElementById('toolbox')
+      });
+
+    var blocksToPython = function() {
+      var code = Blockly.Python.workspaceToCode(blocklyWorkspace);
+      document.getElementById("pythonSrc").value = code;
+    }
+
+    var pythonToBlocks = function() {
+      var converter = new PythonToBlocks();
+      var code = document.getElementById("pythonSrc").value;
+      var result = converter.convertSource(code);
+      var xml_code = result.xml;
+      if(result.error != null) {
+        alert()
+      }
+      if (code == '' || code == undefined || code.trim() == '') {
+        blocklyWorkspace.clear();
+      } else if (xml_code !== '' && xml_code !== undefined) {
+        var blocklyXml = Blockly.Xml.textToDom(xml_code);
+        try {
+            Blockly.Xml.domToWorkspaceDestructive(blocklyXml, blocklyWorkspace);
+        } catch (e) {
+            console.error(e);
+            var errorXml = Blockly.Xml.textToDom(converter.convertSourceToCodeBlock(code));
+            Blockly.Xml.domToWorkspaceDestructive(errorXml, blocklyWorkspace);
+        }
+      } else {
+            var errorXml = Blockly.Xml.textToDom(converter.convertSourceToCodeBlock(code));
+            Blockly.Xml.domToWorkspaceDestructive(errorXml, blocklyWorkspace);
+      }
+      Blockly.Events.disable();
+      // Parsons shuffling
+      if (true) {
+          blocklyWorkspace.shuffle();
+      } else {
+          blocklyWorkspace.align();
+      }
+      Blockly.Events.enable();
+    }
+  </script>
+
+</body>
+
+</html>
