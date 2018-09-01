@@ -6,6 +6,6 @@ The only limitations is that you need to use the version of Blockly contained in
 
 Fortunately, regular Skulpt implementation works fine.
 
-If you want to try the example, you should clone Petlja's fork of BlockPy (https://github.com/Petlja/blockpy-petlja)in the sibling directory named blockpy-petlja.
+If you want to try the example, you should clone Petlja's fork of BlockPy (https://github.com/Petlja/blockpy-petlja) in the sibling directory named blockpy-petlja.
 
 Toolbox in the example does not cover all possible block types. To figure out other available block types, you may take a look to the definition of the BlockPyEditor.CATEGORY_MAP variable in the src/editor.js.
