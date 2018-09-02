@@ -75,7 +75,7 @@
     Blockly.WorkspaceSvg.prototype.preloadAudio_ = function() {};
 
     var openModal = function() {
-      bpm = new  BlocklPyModal();
+      var bpm = new  BlocklPyModal();
       bpm.open("Пример", 700, 500, document.getElementById("pythonSrc").value, '../blockly/media/',
         function(src) {
           if(src) {

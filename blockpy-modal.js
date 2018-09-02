@@ -64,12 +64,12 @@ BlocklPyModal.prototype.open = function(title, width, height, pythonSrc, blockly
     divDialog.appendChild(divContent);
 
     var divHeader = document.createElement("div");
-    $(divHeader).addClass("modal-header d-flex justify-content-between");
+    $(divHeader).addClass("modal-header");
     var divBody = document.createElement("div");
     $(divBody).addClass("modal-body");
     var divFooter = document.createElement("div");
     $(divFooter).addClass("modal-footer");
-    var header = document.createElement("h5");
+    var header = document.createElement("span");
     $(header).addClass("modal-title");
     $(header).html(title);
 
