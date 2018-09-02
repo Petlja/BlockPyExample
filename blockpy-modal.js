@@ -238,24 +238,6 @@ BlocklPyModal.toolboxXml = `
   <block type="lists_create_with"></block>
   <block type="lists_create_empty"></block>
   <block type="lists_append"></block>
-  <block type="procedures_callreturn" inline="true">
-    <mutation name="range">
-      <arg name="">
-        <block type="math_number">
-          <field name="NUM">10</field>
-        </block>
-      </arg>
-    </mutation>
-    <value name="ARG0">
-      <block type="math_number">
-        <field name="NUM">10</field>
-      </block>
-    </value>
-  </block>
-</category>
-<category name="Речници" colour="0">
-  <block type="dicts_create_with"></block>
-  <block type="dict_get_literal"></block>
-</category>
+  <block type="range_list1"></block>
 </xml>`;
 
